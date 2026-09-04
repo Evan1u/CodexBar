@@ -398,6 +398,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     })
 
     private var statusController: StatusItemControlling?
+    private var tokenTrackerBootstrap: TokenTrackerBootstrap?
     private var store: UsageStore?
     private var settings: SettingsStore?
     private var account: AccountInfo?
@@ -437,7 +438,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             runProviderLoginFlow: { [weak self] provider in
                 guard let self else { return }
                 await self.runProviderLoginFlow(provider)
-            })
+            },
+            tokenTrackerActions: self.makeTokenTrackerActions())
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -458,6 +460,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self.installDebugMemoryPressureObserverIfNeeded()
         #endif
         self.ensureStatusController()
+        self.ensureTokenTrackerBootstrap()
         self.closeSwiftUISettingsPlaceholderWindow()
         self.observeSettingsApplicationMenuLanguage()
         self.scheduleSettingsApplicationMenuValidation(
@@ -481,6 +484,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             // KeyboardShortcuts dispatches both normal and menu-tracking hotkeys on the main event loop.
             MainActor.assumeIsolated {
                 self?.statusController?.openMenuFromShortcut()
+            }
+        }
+        KeyboardShortcuts.onKeyUp(for: .openTokenTracker) { [weak self] in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                if self.tokenTrackerBootstrap?.openCurrentSurfaceFromShortcut() != true {
+                    self.statusController?.openMenuFromShortcut()
+                }
             }
         }
         if !self.hasInstalledLimitResetObservers {
@@ -757,6 +768,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self?.openSettings(pane: pane)
         }
         self.statusController = statusController
+    }
+
+    private func ensureTokenTrackerBootstrap() {
+        guard self.tokenTrackerBootstrap == nil,
+              let store,
+              let settings
+        else { return }
+
+        let bootstrap = TokenTrackerBootstrap(
+            store: store,
+            settings: settings,
+            actions: self.makeTokenTrackerActions())
+        self.tokenTrackerBootstrap = bootstrap
+        bootstrap.start()
+    }
+
+    private func makeTokenTrackerActions() -> TokenTrackerAppActions {
+        TokenTrackerAppActions(
+            refresh: { [weak self] in
+                self?.statusController?.requestManualRefresh()
+            },
+            openTokenTrackerSettings: { [weak self] in
+                self?.openSettings(pane: .tokenTracker)
+            },
+            openProviderSettings: { [weak self] providerID in
+                self?.openSettings(pane: TokenTrackerAppActions.settingsPane(for: providerID))
+            },
+            quit: {
+                NSApp.terminate(nil)
+            })
     }
 
     private func trimRebuildableCachesForMemoryPressure() -> MemoryPressureCacheTrimSummary {

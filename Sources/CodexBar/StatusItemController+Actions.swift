@@ -155,6 +155,10 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
             originatingMenuInteractionGeneration: nil)
     }
 
+    func requestManualRefresh() {
+        self.refreshNow()
+    }
+
     @objc func refreshMenuItem(_ sender: NSMenuItem) {
         self.refreshMenuProviderNow(in: sender.menu)
     }

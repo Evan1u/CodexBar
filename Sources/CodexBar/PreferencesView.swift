@@ -10,6 +10,7 @@ enum SettingsPane: Hashable {
     case notifications
     case menuBar
     case menu
+    case tokenTracker
     case advanced
     case hooks
     case plugins
@@ -35,6 +36,7 @@ enum SettingsPane: Hashable {
         case .notifications: L("tab_notifications")
         case .menuBar: L("tab_menu_bar")
         case .menu: L("tab_menu")
+        case .tokenTracker: "Token Tracker"
         case .advanced: L("tab_advanced")
         case .hooks: L("tab_hooks")
         case .plugins: L("Plugins")
@@ -58,6 +60,7 @@ struct PreferencesView: View {
     let managedCodexAccountCoordinator: ManagedCodexAccountCoordinator
     let codexAccountPromotionCoordinator: CodexAccountPromotionCoordinator
     let runProviderLoginFlow: @MainActor (UsageProvider) async -> Void
+    let tokenTrackerActions: TokenTrackerAppActions
     @Environment(\.colorScheme) private var colorScheme
     @AppStorage(SettingsPane.sidebarWidthDefaultsKey) private var sidebarWidth: Double = SettingsPane.sidebarWidth
 
@@ -75,7 +78,8 @@ struct PreferencesView: View {
         selection: PreferencesSelection,
         managedCodexAccountCoordinator: ManagedCodexAccountCoordinator = ManagedCodexAccountCoordinator(),
         codexAccountPromotionCoordinator: CodexAccountPromotionCoordinator? = nil,
-        runProviderLoginFlow: @escaping @MainActor (UsageProvider) async -> Void = { _ in })
+        runProviderLoginFlow: @escaping @MainActor (UsageProvider) async -> Void = { _ in },
+        tokenTrackerActions: TokenTrackerAppActions = .inert)
     {
         self.settings = settings
         self.store = store
@@ -89,6 +93,7 @@ struct PreferencesView: View {
                 usageStore: store,
                 managedAccountCoordinator: managedCodexAccountCoordinator)
         self.runProviderLoginFlow = runProviderLoginFlow
+        self.tokenTrackerActions = tokenTrackerActions
     }
 
     var body: some View {
@@ -171,6 +176,11 @@ struct PreferencesView: View {
             MenuBarPane(settings: self.settings, store: self.store)
         case .menu:
             MenuPane(settings: self.settings, store: self.store)
+        case .tokenTracker:
+            TokenTrackerSettingsView(
+                settings: self.settings,
+                store: self.store,
+                actions: self.tokenTrackerActions)
         case .advanced:
             AdvancedPane(settings: self.settings, store: self.store)
         case .hooks:

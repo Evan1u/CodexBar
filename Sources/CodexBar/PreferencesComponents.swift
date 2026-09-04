@@ -158,6 +158,33 @@ struct OpenMenuShortcutRecorder: NSViewRepresentable {
     }
 }
 
+@MainActor
+struct TokenTrackerShortcutRecorder: NSViewRepresentable {
+    func makeCoordinator() -> OpenMenuShortcutRecorder.Coordinator {
+        OpenMenuShortcutRecorder.Coordinator()
+    }
+
+    func makeNSView(context: Context) -> KeyboardShortcuts.RecorderCocoa {
+        let recorder = KeyboardShortcuts.RecorderCocoa(for: .openTokenTracker)
+        context.coordinator.attach(to: recorder)
+        return recorder
+    }
+
+    func updateNSView(_ nsView: KeyboardShortcuts.RecorderCocoa, context: Context) {
+        nsView.shortcutName = .openTokenTracker
+        context.coordinator.attach(to: nsView)
+    }
+
+    func sizeThatFits(
+        _: ProposedViewSize,
+        nsView: KeyboardShortcuts.RecorderCocoa,
+        context: Context)
+        -> CGSize?
+    {
+        OpenMenuShortcutRecorder.fittedSize(intrinsicHeight: nsView.intrinsicContentSize.height)
+    }
+}
+
 // MARK: - Legacy building blocks (Debug pane)
 
 @MainActor

@@ -12,6 +12,7 @@ extension SettingsPane {
         case .notifications: "notifications"
         case .menuBar: "menuBar"
         case .menu: "menu"
+        case .tokenTracker: "tokenTracker"
         case .advanced: "advanced"
         case .hooks: "hooks"
         case .plugins: "plugins"
@@ -31,6 +32,7 @@ extension SettingsPane {
         // Pre-0.41.1 releases persisted the retired Display pane; its contents moved to Menu Bar.
         case "display": self = .menuBar
         case "menu": self = .menu
+        case "tokenTracker": self = .tokenTracker
         case "advanced": self = .advanced
         case "hooks": self = .hooks
         case "plugins": self = .plugins

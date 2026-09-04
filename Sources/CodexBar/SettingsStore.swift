@@ -248,6 +248,7 @@ final class SettingsStore {
     #endif
 
     @ObservationIgnored let userDefaults: UserDefaults
+    @ObservationIgnored let tokenTrackerPreferences: TokenTrackerPreferencesStore
     @ObservationIgnored let configStore: CodexBarConfigStore
     @ObservationIgnored let antigravityOAuthCredentialsStore: AntigravityOAuthCredentialsStore
     @ObservationIgnored var config: CodexBarConfig
@@ -380,6 +381,9 @@ final class SettingsStore {
             keychainAccessDisabled: KeychainAccessGate.isExplicitlyDisabled,
             stores: legacyStores)
         self.userDefaults = userDefaults
+        self.tokenTrackerPreferences = TokenTrackerPreferencesStore(
+            userDefaults: userDefaults,
+            availableProviderIDs: TokenTrackerProviderProjection.liveCatalog().map(\.id))
         self.configStore = configStore
         self.antigravityOAuthCredentialsStore = antigravityOAuthCredentialsStore
         self.config = config

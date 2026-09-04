@@ -14,6 +14,8 @@ extension UsageStore {
     func refreshUserPluginDiscovery(loader: UserProviderPluginLoader = UserProviderPluginLoader()) {
         _ = UserProviderPluginRegistry.refresh(loader: loader)
         self.settings.updateProviderState(config: self.settings.configSnapshot)
+        self.settings.tokenTrackerPreferences.reconcileAvailableProviderIDs(
+            TokenTrackerProviderProjection.liveCatalog().map(\.id))
     }
 
     func refreshUserPlugin(_ instanceID: ProviderInstanceID) async {
