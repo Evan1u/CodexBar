@@ -226,13 +226,13 @@ extension TokenTrackerProviderProjection {
         }
         if let selected {
             let primary = TokenTrackerProviderMetric.utilization(
-                usedFraction: UsagePercent(raw: selected.window.usedPercent).displayClamped / 100,
+                remainingFraction: UsagePercent(raw: selected.window.remainingPercent).displayClamped / 100,
                 resetsAt: selected.window.resetsAt)
             let secondary = validWindows.filter { $0.index != selected.index }.map { candidate in
                 TokenTrackerMetricRow(
                     label: candidate.label,
                     metric: .utilization(
-                        usedFraction: UsagePercent(raw: candidate.window.usedPercent).displayClamped / 100,
+                        remainingFraction: UsagePercent(raw: candidate.window.remainingPercent).displayClamped / 100,
                         resetsAt: candidate.window.resetsAt))
             }
             return (primary, secondary)
@@ -290,7 +290,7 @@ extension TokenTrackerProviderProjection {
                 TokenTrackerQuotaMeter(
                     id: candidate.id,
                     label: candidate.label,
-                    usedFraction: Self.fraction(percent: candidate.window.usedPercent),
+                    remainingFraction: Self.fraction(percent: candidate.window.remainingPercent),
                     resetsAt: candidate.window.resetsAt)
             }
             return self.dataProjection(kind: .quota(meters), health: health)
@@ -303,7 +303,7 @@ extension TokenTrackerProviderProjection {
             let meter = TokenTrackerQuotaMeter(
                 id: "provider-cost",
                 label: cost.period ?? "Usage",
-                usedFraction: Self.fraction(value: cost.used, total: cost.limit),
+                remainingFraction: Self.fraction(value: max(0, cost.limit - cost.used), total: cost.limit),
                 resetsAt: cost.resetsAt)
             return self.dataProjection(kind: .quota([meter]), health: health)
         }
@@ -314,7 +314,7 @@ extension TokenTrackerProviderProjection {
             let meter = TokenTrackerQuotaMeter(
                 id: "codex-credit-limit",
                 label: limit.title,
-                usedFraction: Self.fraction(value: limit.used, total: limit.limit),
+                remainingFraction: Self.fraction(value: limit.remaining, total: limit.limit),
                 resetsAt: limit.resetsAt)
             return self.dataProjection(kind: .quota([meter]), health: health)
         }

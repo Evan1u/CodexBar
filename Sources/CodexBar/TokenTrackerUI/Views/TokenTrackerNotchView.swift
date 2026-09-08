@@ -190,9 +190,9 @@ struct TokenTrackerProviderIconRing: View {
     var body: some View {
         ZStack {
             Circle().stroke(self.accent.opacity(0.30), lineWidth: 3)
-            if case let .utilization(usedFraction, _) = self.item.primaryMetric {
+            if case let .utilization(remainingFraction, _) = self.item.primaryMetric {
                 Circle()
-                    .trim(from: 0, to: usedFraction)
+                    .trim(from: 0, to: remainingFraction)
                     .stroke(self.accent, style: StrokeStyle(lineWidth: 3, lineCap: .round))
                     .rotationEffect(.degrees(-90))
             }
@@ -326,11 +326,11 @@ private struct TokenTrackerQuotaDetailContent: View {
                         Text(meter.label)
                             .font(.caption)
                         Spacer(minLength: 8)
-                        Text(Self.percent(meter.usedFraction))
+                        Text(Self.percent(meter.remainingFraction))
                             .font(.caption.monospacedDigit())
                             .foregroundStyle(.secondary)
                     }
-                    ProgressView(value: meter.usedFraction)
+                    ProgressView(value: meter.remainingFraction)
                         .tint(self.accent)
                     if let resetsAt = meter.resetsAt {
                         Text("Resets " + resetsAt.formatted(.relative(presentation: .named)))
@@ -343,7 +343,7 @@ private struct TokenTrackerQuotaDetailContent: View {
     }
 
     private static func percent(_ fraction: Double) -> String {
-        "\(Int((fraction * 100).rounded()))% used"
+        "\(Int((fraction * 100).rounded()))% remaining"
     }
 }
 
@@ -395,7 +395,7 @@ private struct TokenTrackerStatusDetailContent: View {
 enum TokenTrackerMetricFormatter {
     static func short(_ metric: TokenTrackerProviderMetric) -> String {
         switch metric {
-        case let .utilization(usedFraction, _): "\(Int((usedFraction * 100).rounded()))%"
+        case let .utilization(remainingFraction, _): "\(Int((remainingFraction * 100).rounded()))%"
         case let .credits(remaining, total, _):
             total.map { "\(Self.number(remaining))/\(Self.number($0))" } ?? Self.number(remaining)
         case let .balance(amount, currencyCode): "\(Self.number(amount)) \(currencyCode)"
@@ -407,9 +407,11 @@ enum TokenTrackerMetricFormatter {
 
     static func long(_ metric: TokenTrackerProviderMetric) -> String {
         switch metric {
-        case let .utilization(usedFraction, resetsAt):
-            let usage = "\(Int((usedFraction * 100).rounded()))% used"
-            return resetsAt.map { "\(usage) · resets \($0.formatted(.relative(presentation: .named)))" } ?? usage
+        case let .utilization(remainingFraction, resetsAt):
+            let remaining = "\(Int((remainingFraction * 100).rounded()))% remaining"
+            return resetsAt.map {
+                "\(remaining) · resets \($0.formatted(.relative(presentation: .named)))"
+            } ?? remaining
         case let .credits(_, _, label):
             return label.map { "\(Self.short(metric)) · \($0)" } ?? Self.short(metric)
         case .balance: return "Balance · \(self.short(metric))"

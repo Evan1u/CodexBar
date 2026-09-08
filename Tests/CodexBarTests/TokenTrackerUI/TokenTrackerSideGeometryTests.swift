@@ -27,14 +27,14 @@ struct TokenTrackerSideGeometryTests {
             size: .standard,
             on: screen))
 
-        #expect(abs(one.aspectRatio - 2.54) < 0.001)
-        #expect(abs(three.aspectRatio - 4.9) < 0.001)
-        #expect(abs(four.aspectRatio - 6.08) < 0.001)
-        #expect(abs(three.longAxis - 274.4) < 0.001)
-        #expect(abs(three.contentBandCenter(for: 0) - 71.12) < 0.001)
+        #expect(abs(one.aspectRatio - 2.011951) < 0.001)
+        #expect(abs(three.aspectRatio - 4.371951) < 0.001)
+        #expect(abs(four.aspectRatio - 5.551951) < 0.001)
+        #expect(abs(three.longAxis - 244.829268) < 0.001)
+        #expect(abs(three.contentBandCenter(for: 0) - 56.334634) < 0.001)
         #expect(three.contentBandCenter(for: 1) == three.longAxis / 2)
         #expect(abs(three.contentBandCenter(for: 1) - three.contentBandCenter(for: 0) - 66.08) < 0.001)
-        #expect(abs(TokenTrackerSideGeometry.railHeight(providerCount: 3, on: screen) - 274.4) < 0.001)
+        #expect(abs(TokenTrackerSideGeometry.railHeight(providerCount: 3, on: screen) - 244.829268) < 0.001)
     }
 
     @Test
@@ -66,7 +66,7 @@ struct TokenTrackerSideGeometryTests {
             metrics: metrics,
             handleFrame: handle))
         #expect(!TokenTrackerSideGeometry.containsExpandedInteractiveTarget(
-            at: CGPoint(x: panel.midX, y: panel.maxY - 190),
+            at: CGPoint(x: panel.midX, y: panel.maxY - 178),
             in: panel,
             metrics: metrics,
             handleFrame: handle))

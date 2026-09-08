@@ -27,12 +27,20 @@ struct TokenTrackerDetailSizingTests {
             displayName: "Codex",
             icon: .monogram("C"),
             accent: ProviderColor(hex: 0x000000),
-            primaryMetric: .utilization(usedFraction: 0.4, resetsAt: nil),
+            primaryMetric: .utilization(remainingFraction: 0.6, resetsAt: nil),
             secondaryMetrics: [],
             detailSections: [],
             detailKind: .quota([
-                TokenTrackerQuotaMeter(id: "session", label: "Current session", usedFraction: 0.4, resetsAt: nil),
-                TokenTrackerQuotaMeter(id: "weekly", label: "Weekly", usedFraction: 0.8, resetsAt: nil),
+                TokenTrackerQuotaMeter(
+                    id: "session",
+                    label: "Current session",
+                    remainingFraction: 0.6,
+                    resetsAt: nil),
+                TokenTrackerQuotaMeter(
+                    id: "weekly",
+                    label: "Weekly",
+                    remainingFraction: 0.2,
+                    resetsAt: nil),
             ]),
             detailBanner: nil,
             health: .healthy,

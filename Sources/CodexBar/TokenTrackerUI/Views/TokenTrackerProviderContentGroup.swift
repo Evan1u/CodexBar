@@ -72,7 +72,7 @@ struct TokenTrackerProviderContentGroup: View {
 
     private var logoSize: CGFloat {
         if self.mode == .side {
-            return max(self.slot * 34 / 56, 5)
+            return max(self.slot * 31 / 56, 5)
         }
         return max(self.slot * 28 / 64, 5)
     }

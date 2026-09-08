@@ -33,14 +33,14 @@ struct TokenTrackerProviderProjectionTests {
             updatedAt: now)
         let item = self.item(snapshot: snapshot)
 
-        #expect(item.primaryMetric == .utilization(usedFraction: 0.8, resetsAt: now.addingTimeInterval(100)))
+        #expect(item.primaryMetric == .utilization(remainingFraction: 0.2, resetsAt: now.addingTimeInterval(100)))
         #expect(item.secondaryMetrics.map(\.label) == ["Session", "Weekly"])
         guard case let .quota(meters) = item.detailKind else {
             Issue.record("Expected ordered quota detail")
             return
         }
         #expect(meters.map(\.label) == ["Session", "Weekly", "Tertiary"])
-        #expect(meters.map(\.usedFraction) == [0.4, 0.8, 0.8])
+        #expect(meters.map(\.remainingFraction) == [0.6, 0.2, 0.2])
     }
 
     @Test
@@ -53,7 +53,13 @@ struct TokenTrackerProviderProjectionTests {
             balance: 42,
             updatedAt: now)
         let snapshot = UsageSnapshot(primary: nil, secondary: nil, providerCost: cost, updatedAt: now)
-        #expect(self.item(snapshot: snapshot).primaryMetric == .credits(remaining: 90, total: 100, label: nil))
+        let costItem = self.item(snapshot: snapshot)
+        #expect(costItem.primaryMetric == .credits(remaining: 90, total: 100, label: nil))
+        guard case let .quota(costMeters) = costItem.detailKind else {
+            Issue.record("Expected provider cost quota detail")
+            return
+        }
+        #expect(costMeters.map(\.remainingFraction) == [0.9])
 
         let balanceOnlyCost = ProviderCostSnapshot(
             used: 0,

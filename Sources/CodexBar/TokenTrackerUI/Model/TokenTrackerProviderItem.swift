@@ -44,7 +44,7 @@ enum TokenTrackerProviderDetailKind: Equatable {
 struct TokenTrackerQuotaMeter: Equatable, Identifiable {
     let id: String
     let label: String
-    let usedFraction: Double
+    let remainingFraction: Double
     let resetsAt: Date?
 }
 
@@ -62,7 +62,7 @@ struct TokenTrackerStatusSummary: Equatable {
 }
 
 enum TokenTrackerProviderMetric: Equatable {
-    case utilization(usedFraction: Double, resetsAt: Date?)
+    case utilization(remainingFraction: Double, resetsAt: Date?)
     case credits(remaining: Double, total: Double?, label: String?)
     case balance(amount: Double, currencyCode: String)
     case labeledValue(label: String, value: String)

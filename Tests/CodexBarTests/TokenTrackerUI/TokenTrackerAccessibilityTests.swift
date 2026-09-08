@@ -6,7 +6,7 @@ import Testing
 @Suite("Token Tracker accessibility")
 struct TokenTrackerAccessibilityTests {
     @Test(arguments: [
-        (TokenTrackerProviderMetric.utilization(usedFraction: 0.42, resetsAt: nil), "42% used", "healthy"),
+        (TokenTrackerProviderMetric.utilization(remainingFraction: 0.58, resetsAt: nil), "58% remaining", "healthy"),
         (.credits(remaining: 7, total: 10, label: "API credits"), "7/10 · API credits", "healthy"),
         (.balance(amount: 12.5, currencyCode: "USD"), "Balance · 12.5 USD", "healthy"),
         (.unavailable("Sign in required"), "Sign in required", "unconfigured"),

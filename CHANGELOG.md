@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.56.3 — 2026-09-08
+
+### Changed
+- Token Tracker: match the three-provider Side rail to the measured reference aspect ratio while preserving provider spacing and rail width.
+- Token Tracker: reduce Side quota-ring size for a slimmer visual balance.
+- Token Tracker: show remaining quota consistently in Side rings, percentages, accessibility labels, and Detail meters.
+
 ## 0.56.2 — Unreleased
 
 ## 0.56.1 — 2026-08-30

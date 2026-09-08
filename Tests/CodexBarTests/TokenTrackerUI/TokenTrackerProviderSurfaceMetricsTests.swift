@@ -11,10 +11,12 @@ struct TokenTrackerProviderSurfaceMetricsTests {
             preferredSlot: 64,
             availableLongAxis: 2000))
 
-        #expect(abs(metrics.aspectRatio - (1.18 * CGFloat(providerCount) + 1.36)) < 0.001)
-        #expect(abs(metrics.contentBandCenter(for: 0) - 1.27 * metrics.slot) < 0.001)
+        let expectedAspectRatio = 717 / CGFloat(164) + 1.18 * CGFloat(providerCount - 3)
+        let expectedEndInset = (expectedAspectRatio - 1.18 * CGFloat(providerCount - 1)) / 2
+        #expect(abs(metrics.aspectRatio - expectedAspectRatio) < 0.001)
+        #expect(abs(metrics.contentBandCenter(for: 0) - expectedEndInset * metrics.slot) < 0.001)
         #expect(abs(metrics.contentBandCenter(for: providerCount - 1) -
-                (metrics.longAxis - 1.27 * metrics.slot)) < 0.001)
+                (metrics.longAxis - expectedEndInset * metrics.slot)) < 0.001)
         #expect(metrics.contentBandCenter(for: providerCount - 1) <= metrics.longAxis)
     }
 
@@ -29,9 +31,9 @@ struct TokenTrackerProviderSurfaceMetricsTests {
             preferredSlot: 64,
             availableLongAxis: 800))
 
-        #expect(abs(three.aspectRatio - 4.9) < 0.001)
-        #expect(abs(three.longAxis - 313.6) < 0.001)
-        #expect(abs(four.aspectRatio - 6.08) < 0.001)
+        #expect(abs(three.aspectRatio - 4.371951) < 0.001)
+        #expect(abs(three.longAxis - 279.804878) < 0.001)
+        #expect(abs(four.aspectRatio - 5.551951) < 0.001)
         #expect(abs(four.longAxis - three.longAxis - 75.52) < 0.001)
     }
 
@@ -43,10 +45,10 @@ struct TokenTrackerProviderSurfaceMetricsTests {
             availableLongAxis: 256,
             backingScaleFactor: 2))
 
-        #expect(metrics.slot == 42)
-        #expect(abs(metrics.longAxis - 255.36) < 0.001)
-        #expect(abs(metrics.contentBandCenter(for: 0) - 53.34) < 0.001)
-        #expect(abs(metrics.contentBandCenter(for: 3) - 202.02) < 0.001)
+        #expect(metrics.slot == 46)
+        #expect(abs(metrics.longAxis - 255.389756) < 0.001)
+        #expect(abs(metrics.contentBandCenter(for: 0) - 46.274878) < 0.001)
+        #expect(abs(metrics.contentBandCenter(for: 3) - 209.114878) < 0.001)
         #expect(TokenTrackerProviderSurfaceMetrics.resolve(
             providerCount: 4,
             preferredSlot: 64,

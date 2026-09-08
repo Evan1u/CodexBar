@@ -1,10 +1,10 @@
 import AppKit
 
 struct TokenTrackerProviderSurfaceMetrics: Equatable, Sendable {
-    // Keep visible content balanced: the space beyond the first/last content
-    // group is approximately the same as the clear space between two groups.
+    // The three-provider shell follows the measured green reference frame
+    // (164 x 717). Additional providers extend it by one established pitch.
+    static let threeProviderAspectRatio: CGFloat = 717 / 164
     static let providerPitchMultiplier: CGFloat = 1.18
-    static let endCenterInsetMultiplier: CGFloat = 1.27
     static let safetyInset: CGFloat = 16
 
     let slot: CGFloat
@@ -14,9 +14,8 @@ struct TokenTrackerProviderSurfaceMetrics: Equatable, Sendable {
 
     static func aspectRatio(providerCount: Int) -> CGFloat? {
         guard providerCount > 0 else { return nil }
-        // The two 1.27S end insets and N - 1 provider pitches keep the
-        // provider marks visually centred within the rail.
-        return self.providerPitchMultiplier * CGFloat(providerCount) + 1.36
+        return self.threeProviderAspectRatio
+            + self.providerPitchMultiplier * CGFloat(providerCount - 3)
     }
 
     static func resolve(
@@ -44,6 +43,8 @@ struct TokenTrackerProviderSurfaceMetrics: Equatable, Sendable {
     }
 
     func contentBandCenter(for index: Int) -> CGFloat {
-        self.slot * (Self.endCenterInsetMultiplier + Self.providerPitchMultiplier * CGFloat(index))
+        let providerBandLength = Self.providerPitchMultiplier * CGFloat(max(self.providerCount - 1, 0))
+        let endCenterInset = (self.aspectRatio - providerBandLength) / 2
+        return self.slot * (endCenterInset + Self.providerPitchMultiplier * CGFloat(index))
     }
 }
