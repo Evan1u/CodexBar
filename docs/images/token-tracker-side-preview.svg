@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" viewBox="0 0 640 760" role="img" aria-labelledby="title desc">
+  <title id="title">Token Tracker floating side rail</title>
+  <desc id="desc">A slim dark side rail with three AI provider icons and remaining quota rings.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#edf2ff"/><stop offset="0.48" stop-color="#e9e4ff"/><stop offset="1" stop-color="#d7f8ef"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff6a32"/><stop offset="1" stop-color="#ffb347"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15e6a1"/><stop offset="1" stop-color="#66f0c0"/></linearGradient>
+    <linearGradient id="lime" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8ff22"/><stop offset="1" stop-color="#bafc54"/></linearGradient>
+    <filter id="shadow" x="-80%" y="-20%" width="260%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#30314e" flood-opacity=".24"/></filter>
+  </defs>
+  <rect width="640" height="760" rx="34" fill="url(#bg)"/>
+  <circle cx="92" cy="98" r="136" fill="#fff" opacity=".35"/>
+  <circle cx="558" cy="666" r="184" fill="#fff" opacity=".27"/>
+  <path d="M0 526C132 430 196 442 288 520S506 664 640 560V760H0Z" fill="#fff" opacity=".2"/>
+  <g filter="url(#shadow)"><rect x="225" y="74" width="190" height="612" rx="95" fill="#08090c"/><path d="M225 326L174 365L225 400Z" fill="#08090c"/></g>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" text-anchor="middle" fill="#fff">
+    <g transform="translate(320 188)"><circle r="48" fill="none" stroke="#292c32" stroke-width="10"/><circle r="48" fill="none" stroke="url(#orange)" stroke-width="10" stroke-linecap="round" stroke-dasharray="220 302" transform="rotate(-82)"/><circle r="31" fill="#111318"/><path d="M-17 0H17M0-17V17M-12-12L12 12M12-12L-12 12M-17-6L17 6M-17 6L17-6" stroke="#fff" stroke-width="3.8" stroke-linecap="round"/><text y="88" font-size="31" font-weight="650">73%</text><text y="112" font-size="12" fill="#989da8" letter-spacing="1.7">CODEX</text></g>
+    <g transform="translate(320 382)"><circle r="48" fill="none" stroke="#292c32" stroke-width="10"/><circle r="48" fill="none" stroke="url(#green)" stroke-width="10" stroke-linecap="round" stroke-dasharray="63 302" transform="rotate(-82)"/><circle r="31" fill="#111318"/><path d="M-15-10L0-19L15-10V8L0 17L-15 8ZM-6-5L0-9L6-5V3L0 7L-6 3Z" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><text y="88" font-size="31" font-weight="650">21%</text><text y="112" font-size="12" fill="#989da8" letter-spacing="1.7">CLAUDE</text></g>
+    <g transform="translate(320 576)"><circle r="48" fill="none" stroke="#292c32" stroke-width="10"/><circle r="48" fill="none" stroke="url(#lime)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157 302" transform="rotate(-82)"/><circle r="31" fill="#111318"/><path d="M-16-17V17M16-17V17M-16-17L16 8M16-17L-16 8M-16 17L16-8M16 17L-16-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text y="88" font-size="31" font-weight="650">52%</text><text y="112" font-size="12" fill="#989da8" letter-spacing="1.7">DEEPSEEK</text></g>
+  </g>
+</svg>

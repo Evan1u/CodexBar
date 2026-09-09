@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="760" viewBox="0 0 960 760" role="img" aria-labelledby="title desc">
+  <title id="title">Token Tracker detail view</title>
+  <desc id="desc">A dark detail panel showing remaining session and weekly quota percentages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#161923"/><stop offset="1" stop-color="#0b0d13"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff6233"/><stop offset="1" stop-color="#ff9c4b"/></linearGradient>
+    <linearGradient id="accent2" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7b5cff"/><stop offset="1" stop-color="#b387ff"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000" flood-opacity=".34"/></filter>
+  </defs>
+  <rect width="960" height="760" rx="34" fill="#e9ecf5"/><circle cx="82" cy="78" r="178" fill="#d8d1ff" opacity=".54"/><circle cx="888" cy="676" r="208" fill="#c7f3e8" opacity=".58"/>
+  <g filter="url(#shadow)"><rect x="82" y="62" width="796" height="636" rx="34" fill="url(#bg)"/><rect x="83" y="63" width="794" height="634" rx="33" fill="none" stroke="#313644"/></g>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <g transform="translate(126 108)"><circle cx="35" cy="35" r="35" fill="#222631"/><path d="M17 35H53M35 17V53M22 22L48 48M48 22L22 48M18 29L52 41M18 41L52 29" stroke="#fff" stroke-width="4" stroke-linecap="round"/><text x="92" y="30" fill="#fff" font-size="30" font-weight="700">Codex</text><text x="92" y="55" fill="#8e95a4" font-size="15">Plus plan · updated just now</text></g>
+    <g transform="translate(126 212)">
+      <text fill="#a4aaba" font-size="14" font-weight="650" letter-spacing="1.7">USAGE LIMITS</text>
+      <g transform="translate(0 38)"><rect width="708" height="130" rx="22" fill="#1c2029" stroke="#2c313e"/><text x="26" y="38" fill="#f4f6fa" font-size="19" font-weight="650">Session</text><text x="682" y="38" fill="#ff8d55" font-size="19" font-weight="700" text-anchor="end">73% remaining</text><rect x="26" y="61" width="656" height="12" rx="6" fill="#303541"/><rect x="26" y="61" width="479" height="12" rx="6" fill="url(#accent)"/><text x="26" y="103" fill="#8e95a4" font-size="15">Resets in 2 hr 14 min</text></g>
+      <g transform="translate(0 188)"><rect width="708" height="130" rx="22" fill="#1c2029" stroke="#2c313e"/><text x="26" y="38" fill="#f4f6fa" font-size="19" font-weight="650">Weekly</text><text x="682" y="38" fill="#a98cff" font-size="19" font-weight="700" text-anchor="end">52% remaining</text><rect x="26" y="61" width="656" height="12" rx="6" fill="#303541"/><rect x="26" y="61" width="341" height="12" rx="6" fill="url(#accent2)"/><text x="26" y="103" fill="#8e95a4" font-size="15">Resets Monday at 09:00</text></g>
+      <g transform="translate(0 338)"><rect width="708" height="92" rx="22" fill="#1c2029" stroke="#2c313e"/><circle cx="39" cy="46" r="17" fill="#252a35"/><path d="M39 35V57M31 43H47" stroke="#61e7b5" stroke-width="3" stroke-linecap="round"/><text x="72" y="41" fill="#f4f6fa" font-size="17" font-weight="650">Credits</text><text x="72" y="64" fill="#8e95a4" font-size="14">Optional account balance</text><text x="682" y="54" fill="#61e7b5" font-size="22" font-weight="700" text-anchor="end">Available</text></g>
+    </g>
+    <text x="480" y="664" fill="#707888" font-size="13" text-anchor="middle" letter-spacing=".3">Remaining quota · local data · private by default</text>
+  </g>
+</svg>
