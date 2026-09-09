@@ -20,22 +20,13 @@
 
 <br />
 
-<table>
-  <tr>
-    <td width="38%" align="center">
-      <img src="docs/images/token-tracker-side-preview.svg" alt="Token Tracker side rail showing remaining quota" width="100%" />
-    </td>
-    <td width="62%" align="center">
-      <img src="docs/images/token-tracker-detail-preview.svg" alt="Token Tracker detail view showing remaining quota" width="100%" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Side rail</b> · always visible, quietly compact</sub></td>
-    <td align="center"><sub><b>Detail view</b> · quota windows and reset times</sub></td>
-  </tr>
-</table>
+<div align="center">
 
-<p align="center"><sub>Preview values are illustrative. Token Tracker shows the remaining percentage, not the amount already used.</sub></p>
+<img src="docs/images/token-tracker-side-real.png" alt="Token Tracker Side rail showing remaining quota for Codex, DeepSeek, and Claude" width="112" />
+
+<sub><b>Rendered from the production SwiftUI components</b> · example data · shown at 2× for clarity</sub>
+
+</div>
 
 ## What it does
 
