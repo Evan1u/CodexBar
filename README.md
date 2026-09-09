@@ -22,9 +22,9 @@
 
 <div align="center">
 
-<img src="docs/images/token-tracker-side-real.png" alt="Token Tracker Side rail showing remaining quota for Codex, DeepSeek, and Claude" width="112" />
+<img src="docs/images/token-tracker-hero.png" alt="Token Tracker Side rail and Codex quota detail on macOS" width="900" />
 
-<sub><b>Rendered from the production SwiftUI components</b> · example data · shown at 2× for clarity</sub>
+<sub><b>Codex, DeepSeek, and Claude at a glance</b> · example data · every percentage shows quota remaining</sub>
 
 </div>
 
